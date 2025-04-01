@@ -1,0 +1,26 @@
+### Fitur Utama:
+1. **Mekanisme Download Aman**:
+   - Memeriksa ketersediaan file sebelum download
+   - Fallback ke konten lokal jika download gagal
+   - Laporan status download
+
+2. **Struktur yang Lebih Baik**:
+   - Variabel URL GitHub yang terpusat
+   - Fungsi khusus untuk handle download
+   - Penanganan error yang lebih elegan
+
+3. **Firewall**:
+   - Tetap membuka port 2050 untuk WAN/WWAN
+   - Konfigurasi tambahan ke file firewall
+
+4. **Laporan Instalasi**:
+   - Menunjukkan file mana yang berhasil diunduh
+   - Informasi akses hotspot
+
+### Cara Penggunaan:
+. Jalankan skrip:
+   
+   chmod +x install-nodogsplash.sh
+   ./install-nodogsplash.sh
+   
+`
