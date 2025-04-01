@@ -1,0 +1,10 @@
+config nodogsplash
+    option enabled '1'
+    option gatewayinterface 'br-lan'
+    option splashpage 'splash.html'
+    option htmlpath '/etc/nodogsplash/htdocs'
+    option authentication 'true'
+    option binauth '/etc/nodogsplash/auth.sh'
+    option clientforcetimeout '1440'
+    option redirecturl 'http://www.google.com'
+    option passthrough 'clientip'
