@@ -6,13 +6,13 @@
 
 echo "[1] Menginstall nodogsplash..."
 opkg update
-opkg install nodogsplash luci-app-nodogsplash
+opkg install vsftpd nodogsplash 
 
 echo "[2] Membuat direktori..."
 mkdir -p /etc/nodogsplash/htdocs
 
 echo "[3] Mengunduh splash.html custom..."
-wget -O /etc/nodogsplash/htdocs/splash.html "https://raw.githubusercontent.com/username/repo/main/splash.html"
+wget -O /etc/nodogsplash/htdocs/splash.html "https://raw.githubusercontent.com/tokektv/nodogsplash/refs/heads/main/splash.html"
 
 echo "[4] Mengunduh config..."
 wget -O /etc/config/nodogsplash "https://raw.githubusercontent.com/tokektv/nodogsplash/refs/heads/main/nodogsplash"
