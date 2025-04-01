@@ -15,7 +15,7 @@ echo "[3] Mengunduh splash.html custom..."
 wget -O /etc/nodogsplash/htdocs/splash.html "https://raw.githubusercontent.com/username/repo/main/splash.html"
 
 echo "[4] Mengunduh config..."
-wget -O /etc/config/nodogsplash "https://raw.githubusercontent.com/username/repo/main/nodogsplash-config"
+wget -O /etc/config/nodogsplash "https://raw.githubusercontent.com/tokektv/nodogsplash/refs/heads/main/nodogsplash"
 
 echo "[5] Mengatur permissions..."
 chown nobody:nogroup /etc/nodogsplash/htdocs/splash.html
