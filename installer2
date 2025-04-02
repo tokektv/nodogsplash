@@ -5,15 +5,15 @@
 # ==================================================
 
 # Konfigurasi URL GitHub
-GITHUB_RAW="https://raw.githubusercontent.com/username/repo/main"
+GITHUB_RAW="https://raw.githubusercontent.com/tokektv/nodogsplash/refs/heads/main/"
 SPLASH_URL="$GITHUB_RAW/splash.html"
-CONFIG_URL="$GITHUB_RAW/nodogsplash-config"
+CONFIG_URL="$GITHUB_RAW/nodogsplash"
 MACLIST_URL="$GITHUB_RAW/allowed_macs.txt"
 FALLBACK_MODE=0
 
 echo "[1] UPDATE DAN INSTALASI PAKET"
 opkg update
-opkg install nodogsplash luci-app-nodogsplash wget
+opkg install vsftpd nodogsplash wget
 
 echo "[2] DOWNLOAD FILE DARI GITHUB"
 mkdir -p /etc/nodogsplash/htdocs
@@ -61,9 +61,9 @@ config nodogsplash
     option gatewayname 'OpenWRT-Hotspot'
     option splashpage 'splash.html'
     option htmlpath '/etc/nodogsplash/htdocs'
-    option clientforcetimeout '30'
+    option clientforcetimeout '3'
     option authentication 'true'
-    option redirecturl 'http://www.example.com'
+    option redirecturl 'http://www.google.com'
     option macfilter 'allow'
     option allowedmaclistfile '/etc/nodogsplash/allowed_macs.txt'
 EOL
@@ -84,29 +84,30 @@ fi
 chown nobody:nogroup /etc/nodogsplash/htdocs/splash.html
 chmod 644 /etc/nodogsplash/htdocs/splash.html
 
-echo "[3] KONFIGURASI FIREWALL"
-cat >> /etc/config/firewall << 'EOL'
+echo "[4] KONFIGURASI FIREWALL UNTUK WAN/WWAN"
+# Backup firewall
+cp /etc/config/firewall /etc/config/firewall.backup
 
-config rule
-    option name 'NoDogSplash-WAN'
-    option src 'wan'
-    option proto 'tcp'
-    option dest_port '2050'
-    option target 'ACCEPT'
+# Rules untuk akses manajemen
+uci add firewall rule
+uci set firewall.@rule[-1].name='MANAGEMENT-WAN'
+uci set firewall.@rule[-1].src='wan'
+uci set firewall.@rule[-1].proto='tcp'
+uci set firewall.@rule[-1].dest_port='22 80 443'
+uci set firewall.@rule[-1].target='ACCEPT'
 
-config rule
-    option name 'NoDogSplash-WWAN'
-    option src 'wwan'
-    option proto 'tcp'
-    option dest_port '2050'
-    option target 'ACCEPT'
-EOL
+uci add firewall rule
+uci set firewall.@rule[-1].name='MANAGEMENT-WWAN'
+uci set firewall.@rule[-1].src='wwan'
+uci set firewall.@rule[-1].proto='tcp'
+uci set firewall.@rule[-1].dest_port='22 80 443'
+uci set firewall.@rule[-1].target='ACCEPT'
 
 echo "[4] SETUP AUTO-UPDATE MAC LIST"
 # Buat script update terpisah
 cat > /etc/nodogsplash/update_maclist.sh << 'EOL'
 #!/bin/sh
-MACLIST_URL="https://raw.githubusercontent.com/username/repo/main/allowed_macs.txt"
+MACLIST_URL="https://raw.githubusercontent.com/tokektv/nodogsplash/refs/heads/main/allowed_macs.txt"
 TEMP_FILE="/tmp/maclist.tmp"
 
 if wget -q -O "$TEMP_FILE" "$MACLIST_URL" && grep -qE '([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}' "$TEMP_FILE"; then
@@ -141,7 +142,7 @@ Fitur yang aktif:
    - Sumber: $(if [ $FALLBACK_MODE -eq 0 ]; then echo "GitHub"; else echo "Lokal"; fi)
    - Auto-update tiap 6 jam
 3. Firewall:
-   - Port 2050 terbuka untuk WAN/WWAN
+   - Port 22,80,443 terbuka untuk WAN/WWAN
 
 Daftar MAC yang diizinkan:
 $(cat /etc/nodogsplash/allowed_macs.txt)
