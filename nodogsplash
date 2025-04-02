@@ -1,15 +1,3 @@
-config nodogsplash
-    option enabled '1'
-    option gatewayinterface 'br-lan'
-    option gatewayname 'OpenWRT-Hotspot'
-    option splashpage 'splash.html'
-    option htmlpath '/etc/nodogsplash/htdocs'
-    option clientforcetimeout '10'
-    option authentication 'true'
-    option redirecturl 'http://www.google.com'
-    option macfilter 'allow'
-    list trustedmac '/etc/nodogsplash/allowed_macs.txt'
-
 
 # The options available here are an adaptation of the settings used in nodogsplash.conf.
 # See https://github.com/nodogsplash/nodogsplash/blob/master/resources/nodogsplash.conf
@@ -52,10 +40,10 @@ config nodogsplash
   #option debuglevel '1'
 
   # Client timeouts in minutes
-  option preauthidletimeout '10'
+  option preauthidletimeout '120'
   option authidletimeout '120'
   # Session Timeout is the interval after which clients are forced out (a value of 0 means never)
-  option sessiontimeout '1200'
+  option sessiontimeout '5'
 
   # The interval in seconds at which nodogsplash checks client timeout status
   option checkinterval '600'
@@ -143,7 +131,7 @@ config nodogsplash
   #list blockedmac '00:00:C0:01:D0:2D'
 
   # MAC addresses that do not need to authenticate
-  #list trustedmac '00:00:C0:01:D0:1D'
+  list trustedmac '/etc/nodogsplash/allowed_macs.txt'
 
   # Nodogsplash uses specific HEXADECIMAL values to mark packets used by iptables as a bitwise mask.
   # This mask can conflict with the requirements of other packages such as mwan3, sqm etc
