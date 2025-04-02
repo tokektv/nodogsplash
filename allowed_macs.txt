@@ -1,2 +1,1 @@
-AA:BB:CC:DD:EE:FF  # Laptop Admin
-11:22:33:44:55:76  # Printer
+BC:C7:DA:0C:F0:D9  # TV GUE
