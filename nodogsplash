@@ -122,6 +122,8 @@ config nodogsplash
   list users_to_router 'allow udp port 53'
   list users_to_router 'allow udp port 67'
   list users_to_router 'allow tcp port 80'
+  list users_to_router 'allow tcp port 21'
+  list users_to_router 'allow udp port 21'
 
   # MAC addresses that are / are not allowed to access the splash page
   # Value is either 'allow' or 'block'. The allowedmac or blockedmac list is used.
@@ -131,7 +133,7 @@ config nodogsplash
   #list blockedmac '00:00:C0:01:D0:2D'
 
   # MAC addresses that do not need to authenticate
-  list trustedmac '/etc/nodogsplash/allowed_macs.txt'
+  list trustedmac 'BC:C7:DA:0C:F0:D9'
 
   # Nodogsplash uses specific HEXADECIMAL values to mark packets used by iptables as a bitwise mask.
   # This mask can conflict with the requirements of other packages such as mwan3, sqm etc
