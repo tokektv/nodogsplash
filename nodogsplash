@@ -43,7 +43,7 @@ config nodogsplash
   option preauthidletimeout '120'
   option authidletimeout '120'
   # Session Timeout is the interval after which clients are forced out (a value of 0 means never)
-  option sessiontimeout '5'
+  option sessiontimeout '120'
 
   # The interval in seconds at which nodogsplash checks client timeout status
   option checkinterval '600'
