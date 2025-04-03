@@ -9,7 +9,7 @@ GITHUB_RAW="https://raw.githubusercontent.com/tokektv/nodogsplash/refs/heads/mai
 SPLASH_URL="$GITHUB_RAW/splash.html"
 CONFIG_URL="$GITHUB_RAW/nodogsplash"
 MACLIST_URL="$GITHUB_RAW/maclist.txt"
-INIT.D_URL="$GITHUB_RAWinit.d/nodogsplash"
+INIT_URL="$GITHUB_RAW/init.d/nodogsplash"
 FALLBACK_MODE=0
 
 echo "[1] UPDATE DAN INSTALASI PAKET"
@@ -33,7 +33,7 @@ download_file() {
 }
 
 # Download file init.d
-wget -O /etc/init.d/nodogsplash "$INIT.D_URL" || {
+wget -O /etc/init.d/nodogsplash "$INIT_URL" || {
      echo "Error: Gagal download" >&2
      exit 1
    }
